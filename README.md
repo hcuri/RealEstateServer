@@ -1,3 +1,3 @@
 # RealEstateServer
 
-Server side application for RealEstateApp
+Server side application for RealEstateApp using MongoDB and Node
