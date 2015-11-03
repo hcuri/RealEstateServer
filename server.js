@@ -11,7 +11,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 8080;        // set our port
+var port = process.env.PORT || 8081;        // set our port
 
 var mongoose   = require('mongoose');
 mongoose.connect('mongodb://root:admin@ds049624.mongolab.com:49624/bears'); // connect to our database
