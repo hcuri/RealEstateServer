@@ -29,12 +29,12 @@ var unAuthRoutes = require('./loginRoutes');
 app.use('/api', unAuthRoutes);
 
 // connect the authorized routers
-//var authRoutes = require('./routes');
-//app.use('/api', authRoutes);
+var authRoutes = require('./routes');
+app.use('/api', authRoutes);
 
 // TODO - Remove in the future
 var bearRoutes = require('./bearRoutes');
-app.use('/api', bearRoutes);
+app.use('/api/bears', bearRoutes);
 
 // Start the server
 app.listen(port);
