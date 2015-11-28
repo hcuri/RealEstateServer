@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var Tenant = require('./tenant');
 
 var PropertySchema = new Schema({
     title: {type: String},
@@ -10,9 +11,9 @@ var PropertySchema = new Schema({
     monthsPaid: {type: Number, required: true},
     rentPayment: {type: Number, required: true},
     returnOnInvestment: {type: Number},
-    tenant: [TenantSchema],
+    tenant: [Tenant.schema],
     image: {type: String},
     dateLastPaid: {type: String}
 });
 
-modle.exports = mongoose.model('Property', PropertySchema);
+module.exports = mongoose.model('Property', PropertySchema);

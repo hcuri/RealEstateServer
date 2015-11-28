@@ -9,4 +9,4 @@ var TenantSchema = new Schema({
     image: {type: String}
 });
 
-modle.exports = mongoose.model('Tenant', TenantSchema);
+module.exports = mongoose.model('Tenant', TenantSchema);
