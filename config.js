@@ -2,5 +2,5 @@
 
 module.exports = {
     "secret": "secretpassword123KEEPitPRIVATE",
-    "database": "mongodb://root:admin@ds049624.mongolab.com:49624/bears"
+    "database": "mongodb://root:admin@ds039484.mongolab.com:39484/my_real_estate_db"
 };
