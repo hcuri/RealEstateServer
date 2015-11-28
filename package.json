@@ -11,6 +11,10 @@
   "dependencies": {
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
-    "mongoose": "^4.2.4"
+    "mongoose": "^4.2.4",
+    "bcrypt": "^0.8.5",
+    "file-stream-rotator": "0.0.6",
+    "jsonwebtoken": "^5.4.0",
+    "morgan": "^1.6.1"
   }
 }
