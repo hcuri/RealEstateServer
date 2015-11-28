@@ -4,7 +4,7 @@ var bodyParser  = require('body-parser');
 var mongoose    = require('mongoose');
 var fs          = require('fs');
 var config      = require('./config');
-var port = process.env.PORT || 8081; // set our port
+var port = process.env.PORT || 8080; // set our port
 
 
 // Setup the app so other modules can also access it through exports
