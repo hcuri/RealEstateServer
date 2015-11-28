@@ -21,8 +21,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // enable logging
-// TODO
-//app.use(require('./logging'));
+app.use(require('./logging'));
 
 // connect the login routes
 var unAuthRoutes = require('./loginRoutes');
