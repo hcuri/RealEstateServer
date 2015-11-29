@@ -31,10 +31,6 @@ app.use('/api', unAuthRoutes);
 var authRoutes = require('./routes');
 app.use('/api', authRoutes);
 
-// TODO - Remove in the future
-var bearRoutes = require('./bearRoutes');
-app.use('/api/bears', bearRoutes);
-
 // Start the server
 app.listen(port);
 console.log('MyRealEstate API Server listening on port: ' + port);
