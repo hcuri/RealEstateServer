@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var User = require('./app/models/user');
-var Tenant = require('./app/models/tenant');
-var Property = require('./app/models/property');
+var User = require('./models/user');
+var Tenant = require('./models/tenant');
+var Property = require('./models/property');
 
 // verify API requests using JWT middleware
 router.use(require('./jwtCheck'));

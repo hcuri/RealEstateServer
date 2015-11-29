@@ -2,5 +2,7 @@
 
 module.exports = {
     "secret": "secretpassword123KEEPitPRIVATE",
-    "database": "mongodb://root:admin@ds039484.mongolab.com:39484/my_real_estate_db"
+    "database": "mongodb://root:admin@ds039484.mongolab.com:39484/my_real_estate_db",
+    "sendGridUsername": "rfriman",
+    "sendGridPassword": "HectorRaz123"
 };

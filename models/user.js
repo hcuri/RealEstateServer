@@ -9,7 +9,9 @@ var UserSchema = new Schema({
     firstName: {type: String},
     lastName: {type: String},
     image: {type: String},
-    dateCreated: {type: String}
+    dateCreated: {type: String},
+    resetPasswordToken: {type: String},
+    resetPasswordExpires: {type: Date}
 });
 
 module.exports = mongoose.model('User', UserSchema);
