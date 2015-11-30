@@ -21,6 +21,7 @@
     "mongoose": "^4.2.4",
     "morgan": "^1.6.1",
     "nodemailer": "^1.10.0",
-    "nodemailer-smtp-transport": "^1.0.4"
+    "nodemailer-smtp-transport": "^1.0.4",
+    "throw.js": "^1.0.0"
   }
 }

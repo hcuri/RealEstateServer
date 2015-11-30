@@ -2,7 +2,7 @@ var app = require('./server');
 var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
 // Performs a check on the JSON Web Token information to authenticate each request
-var check = function jwtCheck(req, res, next) {
+module.exports = function jwtCheck(req, res, next) {
 
     // check header or url parameters or post parameters for token
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -32,5 +32,3 @@ var check = function jwtCheck(req, res, next) {
 
     }
 };
-
-module.exports = check;

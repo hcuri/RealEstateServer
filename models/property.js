@@ -1,8 +1,7 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 var Tenant = require('./tenant');
 
-var PropertySchema = new Schema({
+var PropertySchema = new mongoose.Schema({
     title: {type: String},
     address: {type: String, required: true},
     city: {type: String, required: true},

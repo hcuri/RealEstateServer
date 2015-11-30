@@ -1,3 +1,4 @@
+var throwjs = require('throw.js');
 var express = require('express');
 var router = express.Router();
 var User = require('./models/user');
@@ -7,40 +8,40 @@ var Property = require('./models/property');
 // verify API requests using JWT middleware
 router.use(require('./jwtCheck'));
 
-
 // Route to check if the user is authenticated
-router.get('/', function (req, res) {
+router.get('/', function (req, res, next) {
     res.json({message: 'YOU ARE AUTHENTICATED!'});
 });
 
 // Current user
 router.get('/users/:userid', function (req, res, next) {
     if (!req.auth || req.auth._id !== req.params['userid'] ) {
-        return res.status(401).send();
+        next(new throwjs.unauthorized());
     }
 
-    User.findOne({_id: {$in: [req.auth._id]}}, function (err, user) {
-        if (err) {
-            return next(err);
+    User.findOne(req.auth._id, function (user) {
+        if(!user) {
+            next(new throwjs.notFound());
+        } else {
+            res.status(200).json(user);
         }
-        res.status(200).json(user);
     });
 });
-
 
 router.route('/users/:userid/properties')
 
     // Get all of the current user's properties
-    .get(function (req, res) {
+    .get(function (req, res, next) {
         if (!req.auth || req.auth._id !== req.params['userid'] ) {
-            return res.status(401).send();
+            next(new throwjs.unauthorized());
         }
 
-        User.findOne({_id: {$in: [req.auth._id]}}, function (err, user) {
-            if (err) {
-                return next(err);
+        User.findOne(req.auth._id, function (user) {
+            if(!user) {
+                next(new throwjs.notFound());
+            } else {
+                res.status(200).json(user.properties);
             }
-            res.status(200).json(user.properties);
         });
     })
 
@@ -48,7 +49,7 @@ router.route('/users/:userid/properties')
     .post(function (req, res, next) {
 
         if (!req.auth || req.auth._id !== req.params['userid'] ) {
-            return res.status(401).send();
+            next(new throwjs.unauthorized());
         }
 
         var property = new Property();
@@ -67,19 +68,20 @@ router.route('/users/:userid/properties')
         property.tenant = null;
         property.image = null;
 
-        User.findOne({_id: {$in: [req.auth._id]}}, function (err, user) {
-            if (err) {
-                return next(err);
+        User.findOne(req.auth._id, function (user) {
+            if(!user) {
+                next(new throwjs.notFound());
+            } else {
+
+                user.properties.push(property);
+
+                user.save(function (err, savedUser) {
+                    if (err) {
+                        return (next(err));
+                    }
+                    res.status(200).send();
+                });
             }
-
-            user.properties.push(property);
-
-            user.save(function (err, savedUser) {
-                if (err) {
-                    return (next(err));
-                }
-                res.status(200).send();
-            });
         });
 
     });
@@ -87,109 +89,105 @@ router.route('/users/:userid/properties')
 router.route('/users/:userid/properties/:propertyid')
 
     // Get the current property
-    .get(function (req, res) {
+    .get(function (req, res, next) {
         if (!req.auth || req.auth._id !== req.params['userid'] ) {
-            return res.status(401).send();
+            next(new throwjs.unauthorized());
         }
 
-        User.findOne({_id: {$in: [req.auth._id]}}, function (err, user) {
-            if (err) {
-                return next(err);
-            }
-
-            // Find the specified property
-            var property = user.properties.id(req.params['propertyid']);
-
-            if(property) {
-                res.status(200).json();
+        User.findOne(req.auth._id, function (user) {
+            if(!user) {
+                next(new throwjs.notFound());
             } else {
-                res.status(404).send();
+                // Find the specified property
+                var property = user.properties.id(req.params['propertyid']);
+
+                if (!property) {
+                    next(new throwjs.notFound());
+                } else {
+                    res.status(200).json();
+                }
             }
         });
     })
 
     // Update the current property
-    .put(function (req, res) {
+    .put(function (req, res, next) {
         if (!req.auth || req.auth._id !== req.params['userid'] ) {
-            return res.status(401).send();
+            next(new throwjs.unauthorized());
         }
 
-        // Find the current user
-        User.findOne({_id: {$in: [req.auth._id]}}, function (err, user) {
-            if (err) {
-                return next(err);
-            }
-
-            // Find the property by id
-            var property = user.properties.id(req.params['propertyid']);
-
-            // Update the property variables
-            if(property) {
-
-                property.title = req.body.title;
-                property.type = req.body.type;
-                property.address = req.body.address;
-                property.city = req.body.city;
-                property.value = req.body.value;
-                property.totalRentPaid = req.body.totalRentPaid;
-                property.monthsPaid = req.body.monthsPaid;
-                property.rentPayment = req.body.rentPayment;
-                property.returnOnInvestment = req.body.returnOnInvestment;
-                property.dateLastPaid = req.body.dateLastPaid;
-
-                // TODO - Set the tenant and image
-                property.tenant = null;
-                property.image = null;
-
+        User.findOne(req.auth._id, function (user) {
+            if(!user) {
+                next(new throwjs.notFound());
             } else {
-                return res.status(404).send();
-            }
 
-            // Save the changes to the user document
-            user.save(function (err, savedUser) {
-                if (err) {
-                    return (next(err));
+                // Find the property by id
+                var property = user.properties.id(req.params['propertyid']);
+
+                // Update the property variables
+                if (!property) {
+                    next(new throwjs.notFound());
+                } else {
+                    property.title = req.body.title;
+                    property.type = req.body.type;
+                    property.address = req.body.address;
+                    property.city = req.body.city;
+                    property.value = req.body.value;
+                    property.totalRentPaid = req.body.totalRentPaid;
+                    property.monthsPaid = req.body.monthsPaid;
+                    property.rentPayment = req.body.rentPayment;
+                    property.returnOnInvestment = req.body.returnOnInvestment;
+                    property.dateLastPaid = req.body.dateLastPaid;
+
+                    // TODO - Set the tenant and image
+                    property.tenant = null;
+                    property.image = null;
                 }
-                res.status(200).send();
-            });
+
+                // Save the changes to the user document
+                user.save(function (err, savedUser) {
+                    if (err) {
+                        return (next(err));
+                    }
+                    res.status(200).send();
+                });
+            }
         });
 
     })
 
     // Delete the current property
-    .delete(function (req, res) {
-
+    .delete(function (req, res, next) {
         if (!req.auth || req.auth._id !== req.params['userid'] ) {
-            return res.status(401).send();
+            next(new throwjs.unauthorized());
         }
 
-        // Find the current user
-        User.findOne({_id: {$in: [req.auth._id]}}, function (err, user) {
-            if (err) {
-                return next(err);
-            }
+        User.findOne(req.auth._id, function (user) {
+            if(!user) {
 
-            // Find the property by id
-            var property = user.properties.id(req.params['propertyid']);
-
-
-            // Remove the property
-            if(property) {
-                property.remove();
             } else {
-                return res.status(404).send();
-            }
 
-            // Save the changes to the user document
-            user.save(function (err, savedUser) {
-                if (err) {
-                    return (next(err));
+                // Find the property by id
+                var property = user.properties.id(req.params['propertyid']);
+
+
+                // Remove the property
+                if (!property) {
+                    next(new throwjs.notFound());
+                } else {
+                    property.remove();
+
+                    // Save the changes to the user document
+                    user.save(function (err, savedUser) {
+                        if (err) {
+                            return (next(err));
+                        }
+                        res.status(200).send();
+                    });
                 }
-                res.status(200).send();
-            });
+            }
         });
 
     });
-
 
 module.exports = router;

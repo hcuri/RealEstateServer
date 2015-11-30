@@ -31,6 +31,9 @@ app.use('/api', unAuthRoutes);
 var authRoutes = require('./routes');
 app.use('/api', authRoutes);
 
+// handle error
+app.use(require('./errorHandler'));
+
 // Start the server
 app.listen(port);
 console.log('MyRealEstate API Server listening on port: ' + port);

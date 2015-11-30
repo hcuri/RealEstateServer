@@ -1,15 +1,17 @@
 var express = require('express');
 var router = express.Router();
-var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
-var User = require('./models/user');
+var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
 var nodemailer = require('nodemailer');
 var async = require('async');
 var crypto = require('crypto');
+var throwjs = require('throw.js');
+var User = require('./models/user');
 var config = require('./config');
 var app = require('./server');
 
 router.post('/register', function(req, res, next) {
+
     var user = new User();
     user.email = req.body.email;
     user.properties = [] ;
@@ -21,51 +23,57 @@ router.post('/register', function(req, res, next) {
 
         if(dbUser) {
             // Account already exists for email
-            return res.status(422).send('Account already exists').send();
-        }
+            next(new throwjs.unprocessableEntity('Account already exists'));
+        } else {
 
-        // Can create
-        bcrypt.hash(req.body.password, 10, function (err, hash) {
-            user.password = hash;
+            // Can create
+            bcrypt.hash(req.body.password, 10, function (err, hash) {
 
-            console.log(user);
+                user.password = hash;
 
-            user.save(function(err,savedUser) {
-                if(err) { return(next(err)); }
-                res.status(200).send();
+                user.save(function (err, savedUser) {
+                    if (err) {
+                        return (next(err));
+                    }
+                    res.status(200).send();
+                });
             });
-        });
+        }
     });
 });
 
 router.post('/login', function(req, res, next) {
 
     User.findOne({email: req.body.email})
-        .select('password').select('email')
+        .select('password')
+        .select('email')
         .exec(function (err, user) {
-            if (err) { return next(err); }
-            if (!user) { return res.status(401).send(); }
+            if (!user || !user.password) {
+                next(new throwjs.unauthorized('Incorrect email/password'));
+            } else {
 
-            // Verify the password using bcrypt
-            bcrypt.compare(req.body.password,
-                user.password, function (err, valid) {
-                    if (err) { return next(err); }
-                    if (!valid) { return res.status(401).send(); }
+                // Verify the password using bcrypt
+                bcrypt.compare(req.body.password,
+                    user.password, function (err, valid) {
+                        if (!valid) {
+                            next(new throwjs.unauthorized('Incorrect email/password'));
+                        }
 
-                    // Create a token - valid for 24 hours
-                    var token = jwt.sign(user, app.get('jwtSecret'), {
-                        expiresIn: '24h'
+                        // Create a token - valid for 24 hours
+                        var token = jwt.sign(user, app.get('jwtSecret'), {
+                            expiresIn: '24h'
+                        });
+
+                        // Send the token back to the user
+                        var result = {
+                            token: token,
+                            email: req.body.email,
+                            id: user._id
+                        };
+
+                        res.status(200).json(result);
                     });
-
-                    // Send the token back to the user
-                    var result = {
-                        token: token,
-                        email: req.body.email,
-                        id: user._id
-                    };
-
-                    res.status(200).json(result);
-                });
+            }
         });
 });
 
@@ -80,7 +88,7 @@ router.post('/forgot', function(req, res, next) {
         function(token, done) {
             User.findOne({ email: req.body.email }, function(err, user) {
                 if (!user) {
-                    return res.status(404).send();
+                    return next(new throwjs.notFound());
                 }
 
                 user.resetPasswordToken = token;
@@ -128,7 +136,7 @@ router.post('/reset/:token', function(req, res, next) {
             User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
 
                 if (!user) {
-                    return res.status(404).send();
+                    return next(new throwjs.notFound());
                 }
 
                 user.resetPasswordToken = undefined;
