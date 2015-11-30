@@ -15,12 +15,9 @@ router.get('/', function (req, res) {
 
 // Current user
 router.get('/users/:userid', function (req, res, next) {
-    if (!req.auth) {
-        return res.status(401).send();
-    } else if (req.auth._id !== req.params['userid']) {
+    if (!req.auth || req.auth._id !== req.params['userid'] ) {
         return res.status(401).send();
     }
-
 
     User.findOne({_id: {$in: [req.auth._id]}}, function (err, user) {
         if (err) {
@@ -35,9 +32,7 @@ router.route('/users/:userid/properties')
 
     // Get all of the current user's properties
     .get(function (req, res) {
-        if (!req.auth) {
-            return res.status(401).send();
-        } else if (req.auth._id !== req.params['userid']) {
+        if (!req.auth || req.auth._id !== req.params['userid'] ) {
             return res.status(401).send();
         }
 
@@ -52,26 +47,25 @@ router.route('/users/:userid/properties')
     // Add a new property
     .post(function (req, res, next) {
 
-        // TODO - set these values from the BODY values
-        var property = new Property();
-        property.title = "";
-        property.type = "Apartment";
-        property.address = "5600 SMU Blvd"
-        property.city = "Dallas";
-        property.value = "100000";
-        property.totalRentPaid = 0;
-        property.monthsPaid = 0;
-        property.rentPayment = 1280.00;
-        property.returnOnInvestment = 0.00;
-        property.tenant = null;
-        property.image = null;
-        property.dateLastPaid = null;
-
-        if (!req.auth) {
-            return res.status(401).send();
-        } else if (req.auth._id !== req.params['userid']) {
+        if (!req.auth || req.auth._id !== req.params['userid'] ) {
             return res.status(401).send();
         }
+
+        var property = new Property();
+        property.title = req.body.title;
+        property.type = req.body.type;
+        property.address = req.body.address;
+        property.city = req.body.city;
+        property.value = req.body.value;
+        property.totalRentPaid = req.body.totalRentPaid;
+        property.monthsPaid = req.body.monthsPaid;
+        property.rentPayment = req.body.rentPayment;
+        property.returnOnInvestment = req.body.returnOnInvestment;
+        property.dateLastPaid = req.body.dateLastPaid;
+
+        // TODO - Set the tenant and image
+        property.tenant = null;
+        property.image = null;
 
         User.findOne({_id: {$in: [req.auth._id]}}, function (err, user) {
             if (err) {
@@ -94,9 +88,7 @@ router.route('/users/:userid/properties/:propertyid')
 
     // Get the current property
     .get(function (req, res) {
-        if (!req.auth) {
-            return res.status(401).send();
-        } else if (req.auth._id !== req.params['userid']) {
+        if (!req.auth || req.auth._id !== req.params['userid'] ) {
             return res.status(401).send();
         }
 
@@ -118,11 +110,7 @@ router.route('/users/:userid/properties/:propertyid')
 
     // Update the current property
     .put(function (req, res) {
-        if (!req.auth) {
-            // Check the authentication
-            return res.status(401).send();
-        } else if (req.auth._id !== req.params['userid']) {
-            // Check the the userid provided is the same as the current token for the user
+        if (!req.auth || req.auth._id !== req.params['userid'] ) {
             return res.status(401).send();
         }
 
@@ -138,19 +126,20 @@ router.route('/users/:userid/properties/:propertyid')
             // Update the property variables
             if(property) {
 
-                // TODO - set these values from the BODY values
-                property.title = "SpaceX HQ";
-                property.type = "Facility";
-                property.address = "1 Rocket Rd"
-                property.city = "Hawthorne";
-                property.value = "9999999";
-                property.totalRentPaid = 0;
-                property.monthsPaid = 0;
-                property.rentPayment = 85000.00;
-                property.returnOnInvestment = 0.00;
+                property.title = req.body.title;
+                property.type = req.body.type;
+                property.address = req.body.address;
+                property.city = req.body.city;
+                property.value = req.body.value;
+                property.totalRentPaid = req.body.totalRentPaid;
+                property.monthsPaid = req.body.monthsPaid;
+                property.rentPayment = req.body.rentPayment;
+                property.returnOnInvestment = req.body.returnOnInvestment;
+                property.dateLastPaid = req.body.dateLastPaid;
+
+                // TODO - Set the tenant and image
                 property.tenant = null;
                 property.image = null;
-                property.dateLastPaid = null;
 
             } else {
                 return res.status(404).send();
@@ -170,12 +159,7 @@ router.route('/users/:userid/properties/:propertyid')
     // Delete the current property
     .delete(function (req, res) {
 
-
-        if (!req.auth) {
-            // Check the authentication
-            return res.status(401).send();
-        } else if (req.auth._id !== req.params['userid']) {
-            // Check the the userid provided is the same as the current token for the user
+        if (!req.auth || req.auth._id !== req.params['userid'] ) {
             return res.status(401).send();
         }
 

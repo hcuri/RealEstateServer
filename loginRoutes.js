@@ -4,7 +4,6 @@ var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var User = require('./models/user');
 var bcrypt = require('bcrypt');
 var nodemailer = require('nodemailer');
-var smtpTransport = require('nodemailer-smtp-transport');
 var async = require('async');
 var crypto = require('crypto');
 var config = require('./config');
