@@ -9,7 +9,7 @@ var Property = require('./models/property');
 router.use(require('./jwtCheck'));
 
 // Route to check if the user is authenticated
-router.get('/', function (req, res, next) {
+router.get('/authenticated', function (req, res, next) {
     res.json({message: 'YOU ARE AUTHENTICATED!'});
 });
 
