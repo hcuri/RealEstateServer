@@ -16,14 +16,14 @@ router.get('/authenticated', function (req, res, next) {
 // Current user
 router.get('/users/:userid', function (req, res, next) {
     if (!req.auth || req.auth._id !== req.params['userid'] ) {
-        next(new throwjs.unauthorized());
+        return next(new throwjs.unauthorized());
     }
 
-    User.findOne(req.auth._id, function (user) {
+    User.findById(req.auth._id, function (err, user) {
         if(!user) {
-            next(new throwjs.notFound());
+            return next(new throwjs.notFound());
         } else {
-            res.status(200).json(user);
+            return res.status(200).json(user);
         }
     });
 });
@@ -36,7 +36,7 @@ router.route('/users/:userid/properties')
             next(new throwjs.unauthorized());
         }
 
-        User.findOne(req.auth._id, function (user) {
+        User.findById(req.auth._id, function (err, user) {
             if(!user) {
                 next(new throwjs.notFound());
             } else {

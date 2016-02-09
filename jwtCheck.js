@@ -16,7 +16,7 @@ module.exports = function jwtCheck(req, res, next) {
                 return res.json({ success: false, message: 'Failed to authenticate token.' });
             } else {
                 // if everything is good, save to request for use in other routes
-                req.auth = decoded;
+                req.auth = decoded._doc;
                 next();
             }
         });

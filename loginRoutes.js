@@ -76,7 +76,8 @@ router.post('/login', function(req, res, next) {
                             id: user._id
                         };
 
-                        res.status(200).json(result);
+                        console.log(result);
+                        return res.status(200).json(result);
                     });
             }
         });

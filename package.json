@@ -9,19 +9,19 @@
     "url": "https://github.com/hcuri/RealEstateServer.git"
   },
   "dependencies": {
-    "async": "^1.5.0",
-    "bcrypt": "^0.8.5",
-    "body-parser": "^1.14.1",
-    "crypto": "0.0.3",
-    "express": "^4.13.3",
-    "file-stream-rotator": "0.0.6",
-    "jsonwebtoken": "^5.4.0",
-    "kerberos": "0.0.17",
-    "mongodb": "^2.0.49",
-    "mongoose": "^4.2.4",
-    "morgan": "^1.6.1",
-    "nodemailer": "^1.10.0",
-    "nodemailer-smtp-transport": "^1.0.4",
-    "throw.js": "^1.0.0"
+    "async": "*",
+    "bcrypt": "*",
+    "body-parser": "*",
+    "crypto": "*",
+    "express": "*",
+    "file-stream-rotator": "*",
+    "jsonwebtoken": "*",
+    "kerberos": "*",
+    "mongodb": "*",
+    "mongoose": "*",
+    "morgan": "*",
+    "nodemailer": "*",
+    "nodemailer-smtp-transport": "*",
+    "throw.js": "*"
   }
 }
