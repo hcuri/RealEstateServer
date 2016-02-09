@@ -33,14 +33,14 @@ router.route('/users/:userid/properties')
     // Get all of the current user's properties
     .get(function (req, res, next) {
         if (!req.auth || req.auth._id !== req.params['userid'] ) {
-            next(new throwjs.unauthorized());
+            return next(new throwjs.unauthorized());
         }
 
         User.findById(req.auth._id, function (err, user) {
             if(!user) {
-                next(new throwjs.notFound());
+                return next(new throwjs.notFound());
             } else {
-                res.status(200).json(user.properties);
+                return res.status(200).json(user.properties);
             }
         });
     })
@@ -49,7 +49,7 @@ router.route('/users/:userid/properties')
     .post(function (req, res, next) {
 
         if (!req.auth || req.auth._id !== req.params['userid'] ) {
-            next(new throwjs.unauthorized());
+            return next(new throwjs.unauthorized());
         }
 
         var property = new Property();
@@ -68,9 +68,9 @@ router.route('/users/:userid/properties')
         property.tenant = null;
         property.image = null;
 
-        User.findOne(req.auth._id, function (user) {
+        User.findById(req.auth._id, function (err, user) {
             if(!user) {
-                next(new throwjs.notFound());
+                return next(new throwjs.notFound());
             } else {
 
                 user.properties.push(property);
@@ -79,7 +79,7 @@ router.route('/users/:userid/properties')
                     if (err) {
                         return (next(err));
                     }
-                    res.status(200).send();
+                    return res.status(200).send();
                 });
             }
         });
@@ -91,20 +91,20 @@ router.route('/users/:userid/properties/:propertyid')
     // Get the current property
     .get(function (req, res, next) {
         if (!req.auth || req.auth._id !== req.params['userid'] ) {
-            next(new throwjs.unauthorized());
+            return next(new throwjs.unauthorized());
         }
 
-        User.findOne(req.auth._id, function (user) {
+        User.findById(req.auth._id, function (err, user) {
             if(!user) {
-                next(new throwjs.notFound());
+                return next(new throwjs.notFound());
             } else {
                 // Find the specified property
                 var property = user.properties.id(req.params['propertyid']);
 
                 if (!property) {
-                    next(new throwjs.notFound());
+                    return next(new throwjs.notFound());
                 } else {
-                    res.status(200).json();
+                    return res.status(200).json(property);
                 }
             }
         });
@@ -113,12 +113,12 @@ router.route('/users/:userid/properties/:propertyid')
     // Update the current property
     .put(function (req, res, next) {
         if (!req.auth || req.auth._id !== req.params['userid'] ) {
-            next(new throwjs.unauthorized());
+             return next(new throwjs.unauthorized());
         }
 
-        User.findOne(req.auth._id, function (user) {
+        User.findById(req.auth._id, function (err, user) {
             if(!user) {
-                next(new throwjs.notFound());
+                return next(new throwjs.notFound());
             } else {
 
                 // Find the property by id
@@ -126,7 +126,7 @@ router.route('/users/:userid/properties/:propertyid')
 
                 // Update the property variables
                 if (!property) {
-                    next(new throwjs.notFound());
+                    return next(new throwjs.notFound());
                 } else {
                     property.title = req.body.title;
                     property.type = req.body.type;
@@ -149,7 +149,7 @@ router.route('/users/:userid/properties/:propertyid')
                     if (err) {
                         return (next(err));
                     }
-                    res.status(200).send();
+                    return res.status(200).send();
                 });
             }
         });
@@ -159,10 +159,10 @@ router.route('/users/:userid/properties/:propertyid')
     // Delete the current property
     .delete(function (req, res, next) {
         if (!req.auth || req.auth._id !== req.params['userid'] ) {
-            next(new throwjs.unauthorized());
+            return next(new throwjs.unauthorized());
         }
 
-        User.findOne(req.auth._id, function (user) {
+        User.findById(req.auth._id, function (err, user) {
             if(!user) {
 
             } else {
@@ -182,7 +182,7 @@ router.route('/users/:userid/properties/:propertyid')
                         if (err) {
                             return (next(err));
                         }
-                        res.status(200).send();
+                        return res.status(200).send();
                     });
                 }
             }
