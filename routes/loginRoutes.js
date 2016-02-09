@@ -6,9 +6,9 @@ var nodemailer = require('nodemailer');
 var async = require('async');
 var crypto = require('crypto');
 var throwjs = require('throw.js');
-var User = require('./models/user');
-var config = require('./config');
-var app = require('./server');
+var User = require('./../models/user');
+var config = require('./../config');
+var app = require('./../server');
 
 // Route to check if the api works
 router.get('/', function (req, res, next) {

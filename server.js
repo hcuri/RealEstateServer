@@ -24,12 +24,14 @@ app.use(bodyParser.json());
 app.use(require('./logging'));
 
 // connect the login routes
-var unAuthRoutes = require('./loginRoutes');
-app.use('/api', unAuthRoutes);
+var loginRoutes = require('./routes/loginRoutes');
+app.use('/api', loginRoutes);
 
 // connect the authorized routers
-var authRoutes = require('./routes');
-app.use('/api', authRoutes);
+var userRoutes = require('./routes/userRoutes');
+var propertyRoutes = require('./routes/propertyRoutes');
+app.use('/api', userRoutes);
+app.use('/api', propertyRoutes);
 
 // handle error
 app.use(require('./errorHandler'));

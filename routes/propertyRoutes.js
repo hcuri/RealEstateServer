@@ -1,32 +1,12 @@
 var throwjs = require('throw.js');
 var express = require('express');
 var router = express.Router();
-var User = require('./models/user');
-var Tenant = require('./models/tenant');
-var Property = require('./models/property');
+var User = require('./../models/user');
+var Tenant = require('./../models/tenant');
+var Property = require('./../models/property');
 
 // verify API requests using JWT middleware
-router.use(require('./jwtCheck'));
-
-// Route to check if the user is authenticated
-router.get('/authenticated', function (req, res, next) {
-    res.json({message: 'YOU ARE AUTHENTICATED!'});
-});
-
-// Current user
-router.get('/users/:userid', function (req, res, next) {
-    if (!req.auth || req.auth._id !== req.params['userid'] ) {
-        return next(new throwjs.unauthorized());
-    }
-
-    User.findById(req.auth._id, function (err, user) {
-        if(!user) {
-            return next(new throwjs.notFound());
-        } else {
-            return res.status(200).json(user);
-        }
-    });
-});
+router.use(require('./../jwtCheck'));
 
 router.route('/users/:userid/properties')
 
@@ -86,6 +66,8 @@ router.route('/users/:userid/properties')
 
     });
 
+
+
 router.route('/users/:userid/properties/:propertyid')
 
     // Get the current property
@@ -113,7 +95,7 @@ router.route('/users/:userid/properties/:propertyid')
     // Update the current property
     .put(function (req, res, next) {
         if (!req.auth || req.auth._id !== req.params['userid'] ) {
-             return next(new throwjs.unauthorized());
+            return next(new throwjs.unauthorized());
         }
 
         User.findById(req.auth._id, function (err, user) {
