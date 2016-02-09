@@ -10,6 +10,11 @@ var User = require('./models/user');
 var config = require('./config');
 var app = require('./server');
 
+// Route to check if the api works
+router.get('/', function (req, res, next) {
+    res.json({message: 'API works!'});
+});
+
 router.post('/register', function(req, res, next) {
 
     var user = new User();
