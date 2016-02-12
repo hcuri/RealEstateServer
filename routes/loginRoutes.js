@@ -5,6 +5,7 @@ var bcrypt = require('bcrypt');
 var nodemailer = require('nodemailer');
 var async = require('async');
 var crypto = require('crypto');
+var path = require('path');
 var throwjs = require('throw.js');
 var User = require('./../models/user');
 var config = require('./../config');
@@ -136,7 +137,12 @@ router.post('/forgot', function(req, res, next) {
     });
 });
 
+router.get('/reset/:token', function(req, res) {
+    res.sendFile(path.join(__dirname + '/../views/passwordReset.html'));
+});
+
 router.post('/reset/:token', function(req, res, next) {
+
     async.waterfall([
         function(done) {
             User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
