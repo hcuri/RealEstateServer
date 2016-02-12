@@ -5,13 +5,14 @@ public (no authentication required)
 ------
 
 ### POST
-* call 1
 
 ### PUT
 
 ### GET ONE
 
 ### GET ALL
+* /
+returns message saying 'API works!'
 
 ### DELETE
 
