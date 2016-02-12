@@ -5,14 +5,16 @@ public (no authentication required)
 ------
 
 ### POST
+#### /register
+Registers a new user
 
 ### PUT
 
 ### GET ONE
 
 ### GET ALL
-* /
-returns message saying 'API works!'
+#### /
+Returns message saying 'API works!'
 
 ### DELETE
 
