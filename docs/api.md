@@ -3,8 +3,9 @@ API Calls
 
 public (no authentication required)
 ------
+This calls are currently in loginRoutes.js
 
-### POST (currently loginRoutes.js)
+### POST
 #### /register
 Registers a new user (more detail needed)
 #### /login
