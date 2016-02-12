@@ -4,13 +4,21 @@ API Calls
 public (no authentication required)
 ------
 
-### POST
+### POST (currently loginRoutes.js)
 #### /register
-Registers a new user
+Registers a new user (more detail needed)
+#### /login
+Login an existing user (more detail needed)
+#### /forgot
+Sends email to reset password to an existing user (more detail needed)
+#### /reset/:token
+Updates an existing user's password (more detail needed and may need to be a PUT)
 
 ### PUT
 
 ### GET ONE
+#### /reset/:token
+Displays reset password html page.
 
 ### GET ALL
 #### /
