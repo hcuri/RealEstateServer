@@ -1,9 +1,8 @@
 API Calls
 =========
 
-public (no authentication required)
+public (no authentication required) (currenlty in loginRoutes.js)
 ------
-This calls are currently in loginRoutes.js
 
 ### POST
 #### /register
@@ -27,7 +26,7 @@ Returns message saying 'API works!'
 
 ### DELETE
 
-private (authentication required)
+private (authentication required) (currently in userRoutes.js)
 ------
 
 ### POST
@@ -37,6 +36,8 @@ private (authentication required)
 ### GET ONE
 
 ### GET ALL
+#### /authenticated
+Returns message saying 'YOU ARE AUTHENTICATED!'
 
 ### DELETE
 
@@ -46,8 +47,12 @@ user (Entity)
 ### POST
 
 ### PUT
+#### /users/:userid
+Updates user name? (incomplete and more detail needed)
 
 ### GET ONE
+#### /users/:userid
+Returns current user (more detail needed)
 
 ### GET ALL
 
@@ -57,14 +62,24 @@ property (Entity)
 ------
 
 ### POST
+#### /users/:userid/properties
+Creates new property from an existing user. (more details needed)
 
 ### PUT
+#### /users/:userid/properties/:propertyid
+Updates an individual property from an existing user. (incomplete, more details needed)
 
 ### GET ONE
+#### /users/:userid/properties/:propertyid
+Get an individual property from an existing user. (more details needed)
 
 ### GET ALL
+#### /users/:userid/properties
+Get all properties from an existing user. (more details needed)
 
 ### DELETE
+#### /users/:userid/properties/:propertyid
+Deletes an individual property from an existing user. (More details needed)
 
 zip (Entity)
 ------
