@@ -41,7 +41,7 @@ Returns message saying 'YOU ARE AUTHENTICATED!'
 
 ### DELETE
 
-user (Entity)
+user (Entity) (currently in userRoutes.js)
 ------
 
 ### POST
@@ -58,7 +58,7 @@ Returns current user (more detail needed)
 
 ### DELETE
 
-property (Entity)
+property (Entity) (currently in propertyRoutes.js)
 ------
 
 ### POST
