@@ -2,15 +2,15 @@ var throwjs = require('throw.js');
 var express = require('express');
 var router = express.Router();
 var User = require('./../models/user');
-var Expense = require('./../models/expense');
+var Lease = require('./../models/lease');
 var _ = require('lodash');
 
 // verify API requests using JWT middleware
 router.use(require('./../jwtCheck'));
 
-router.route('/users/:userid/properties/:propertyid/expenses')
+router.route('/users/:userid/properties/:propertyid/leases')
 
-    // Get all of the current property's expenses
+    // Get all of the current property's leases
     .get(function (req, res, next) {
         if (!req.auth || req.auth._id !== req.params['userid'] ) {
             return next(new throwjs.unauthorized());
@@ -26,7 +26,7 @@ router.route('/users/:userid/properties/:propertyid/expenses')
                 });
 
                 if(property) {
-                    return res.status(200).json(property.expenses);
+                    return res.status(200).json(property.leases);
                 } else {
                     return next(new throwjs.notFound());
                 }
@@ -34,7 +34,7 @@ router.route('/users/:userid/properties/:propertyid/expenses')
         });
     })
 
-    // Add a new property expense
+    // Add a new property lease
     .post(function (req, res, next) {
 
         if (!req.auth || req.auth._id !== req.params['userid'] ) {
@@ -52,12 +52,16 @@ router.route('/users/:userid/properties/:propertyid/expenses')
 
                 if(property) {
 
-                    var expense = new Expense();
-                    expense.amount = req.body.amount;
-                    expense.description = req.body.description;
-                    expense.date = req.body.date;
+                    var lease = new Lease();
 
-                    property.expenses.push(expense);
+                    lease.numberOfTerms = req.body.numberOfTerms;
+                    lease.termPeriod = req.body.termPeriod;
+                    lease.rentAmount = req.body.rentAmount;
+                    lease.rentDueDate = req.body.rentDueDate;
+                    lease.startDate = req.body.startDate;
+                    lease.endDate = req.body.endDate;
+
+                    property.leases.push(lease);
 
                     user.save(function (err, savedUser) {
                         if (err) {
@@ -76,7 +80,7 @@ router.route('/users/:userid/properties/:propertyid/expenses')
 
 
 
-router.route('/users/:userid/properties/:propertyid/expenses/:expenseid')
+router.route('/users/:userid/properties/:propertyid/leases/:leaseid')
 
     // Get the current expense
     .get(function (req, res, next) {
@@ -94,12 +98,12 @@ router.route('/users/:userid/properties/:propertyid/expenses/:expenseid')
                 });
 
                 if (property) {
-                    var expense = _.find(property.expenses, function (item) {
-                        return item.id == req.params['expenseid'];
+                    var lease = _.find(property.leases, function (item) {
+                        return item.id == req.params['leaseid'];
                     });
 
-                    if (expense) {
-                        return res.status(200).json(expense);
+                    if (lease) {
+                        return res.status(200).json(lease);
                     } else {
                         return next(new throwjs.notFound());
                     }
@@ -126,15 +130,18 @@ router.route('/users/:userid/properties/:propertyid/expenses/:expenseid')
                 });
 
                 if (property) {
-                    var expense = _.find(property.expenses, function (item) {
-                        return item.id == req.params['expenseid'];
+                    var lease = _.find(property.leases, function (item) {
+                        return item.id == req.params['leaseid'];
                     });
 
-                    if (expense) {
+                    if (lease) {
 
-                        expense.amount = req.body.amount;
-                        expense.description = req.body.description;
-                        expense.date = req.body.date;
+                        lease.numberOfTerms = req.body.numberOfTerms;
+                        lease.termPeriod = req.body.termPeriod;
+                        lease.rentAmount = req.body.rentAmount;
+                        lease.rentDueDate = req.body.rentDueDate;
+                        lease.startDate = req.body.startDate;
+                        lease.endDate = req.body.endDate;
 
                         // Save the changes to the user document
                         user.save(function (err, savedUser) {
@@ -169,13 +176,13 @@ router.route('/users/:userid/properties/:propertyid/expenses/:expenseid')
                 });
 
                 if (property) {
-                    var expense = _.find(property.expenses, function (item) {
-                        return item.id == req.params['expenseid'];
+                    var lease = _.find(property.lease, function (item) {
+                        return item.id == req.params['lease'];
                     });
 
-                    if (expense) {
+                    if (lease) {
 
-                        expense.remove();
+                        lease.remove();
 
                         // Save the changes to the user document
                         user.save(function (err, savedUser) {

@@ -184,12 +184,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1456973449233,
+			"time": 1456974780789,
 			"name": "Update Lease",
 			"description": "",
 			"collectionId": "a0055f2c-18ee-e473-a245-d67f11366437",
 			"responses": [],
-			"rawModeData": "{\n  \"amount\": 200,\n  \"description\": \"my expense\",\n  \"date\": \"today\"\n}"
+			"rawModeData": "{\n    \"numberOfTerms\": 15,\n    \"termPeriod\": \"months\",\n    \"rentAmount\": 500,\n    \"rentDueDate\": \"01\",\n    \"startDate\": \"01/24/2015\",\n    \"endDate\": \"01/24/2015\"\n}"
 		},
 		{
 			"id": "1aab90ce-ce43-a36e-ab99-104ffcc3e3e2",
@@ -402,12 +402,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1456973518093,
+			"time": 1456974786895,
 			"name": "Delete Lease",
 			"description": "",
 			"collectionId": "a0055f2c-18ee-e473-a245-d67f11366437",
 			"responses": [],
-			"rawModeData": "{\n  \"amount\": 200,\n  \"description\": \"my expense\",\n  \"date\": \"today\"\n}"
+			"rawModeData": ""
 		},
 		{
 			"id": "5eee195c-27a6-744e-586c-a667c29587cd",
@@ -605,12 +605,12 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1456973511506,
+			"time": 1456974710737,
 			"name": "New Lease",
 			"description": "",
 			"collectionId": "a0055f2c-18ee-e473-a245-d67f11366437",
 			"responses": [],
-			"rawModeData": "{\n    \"amount\": 100,\n    \"description\": \"my expense\",\n    \"date\": \"today\"\n}"
+			"rawModeData": "{\n    \"numberOfTerms\": 5,\n    \"termPeriod\": \"months\",\n    \"rentAmount\": 500,\n    \"rentDueDate\": \"01\",\n    \"startDate\": \"01/24/2015\",\n    \"endDate\": \"01/24/2015\"\n}"
 		},
 		{
 			"id": "c319dcfb-cb86-545f-72d0-4c960c0afd5e",
