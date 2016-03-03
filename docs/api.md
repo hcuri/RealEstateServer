@@ -41,8 +41,8 @@ Returns message saying 'YOU ARE AUTHENTICATED!'
 
 ### DELETE
 
-user (Entity) (currently in userRoutes.js)
-------
+User (Entity)
+-------------
 
 ### POST
 
@@ -54,12 +54,12 @@ Updates user name? (incomplete and more detail needed)
 #### /users/:userid
 Returns current user (more detail needed)
 
-### GET ALL
+### GET ALL \[Not available\] 
 
-### DELETE
+### DELETE \[Not available\]
 
-property (Entity) (currently in propertyRoutes.js)
-------
+Property (Entity)
+-----------------
 
 ### POST
 #### /users/:userid/properties
@@ -81,68 +81,95 @@ Get all properties from an existing user. (more details needed)
 #### /users/:userid/properties/:propertyid
 Deletes an individual property from an existing user. (More details needed)
 
-zip (Entity)
-------
+Expense (Entity)
+----------------
 
 ### POST
+#### /users/:userid/properties/:propertyid/expenses
+Add a new expense to a property.
 
 ### PUT
+#### /users/:userid/properties/:propertyid/expenses/:expenseid
+Update a single expense for a property.
 
 ### GET ONE
+#### /users/:userid/properties/:propertyid/expenses/:expenseid
+Get a single expense from a property.
 
 ### GET ALL
+#### /users/:userid/properties/:propertyid/expenses
+Get all expenses from a property.
 
 ### DELETE
+#### /users/:userid/properties/:propertyid/expenses/:expenseid
+Delete an individual expense from a property.
 
-expense (Entity)
-------
+Lease (Entity)
+--------------
 
 ### POST
+#### /users/:userid/properties/:propertyid/leases
+Add a new lease to a property.
 
 ### PUT
+#### /users/:userid/properties/:propertyid/leases/:leaseid
+Update a single lease on a property.
 
 ### GET ONE
+#### /users/:userid/properties/:propertyid/leases/:leaseid
+Get a single lease from a property.
 
 ### GET ALL
+#### /users/:userid/properties/:propertyid/leases
+Get all leases from a property.
 
 ### DELETE
+#### /users/:userid/properties/:propertyid/leases/:leaseid
+Delete an individual lease from a property.
 
-lease (Entity)
-------
+Payment (Entity)
+----------------
 
 ### POST
+#### /users/:userid/properties/:propertyid/leases/:leaseid/payments
+Add a new payment to a property lease.
 
 ### PUT
+#### /users/:userid/properties/:propertyid/leases/:leaseid/payments/:paymentid
+Update a single payment from a property lease.
 
 ### GET ONE
+#### /users/:userid/properties/:propertyid/leases/:leaseid/payments/:paymentid
+Get a single payment from a property lease.
 
 ### GET ALL
+#### /users/:userid/properties/:propertyid/leases/:leaseid/payments
+Get all payments of a property lease.
 
 ### DELETE
+#### /users/:userid/properties/:propertyid/leases/:leaseid/payments/:paymentid
+Delete an individual payment from a property lease.
 
-payment (Entity)
-------
+Tenant (Entity)
+---------------
 
 ### POST
+#### /users/:userid/properties/:propertyid/leases/:leaseid/tenants
+Add a new tenant to a property lease.
 
 ### PUT
+#### /users/:userid/properties/:propertyid/leases/:leaseid/tenants/:tenantid
+Update a single tenant from a property lease.
 
 ### GET ONE
+#### /users/:userid/properties/:propertyid/leases/:leaseid/tenants/:tenantid
+Get a single tenant from a property lease.
 
 ### GET ALL
+#### /users/:userid/properties/:propertyid/leases/:leaseid/tenants
+Get all tenants of a property lease.
 
 ### DELETE
-
-tenant (Entity)
-------
-
-### POST
-
-### PUT
-
-### GET ONE
-
-### GET ALL
-
-### DELETE
+#### /users/:userid/properties/:propertyid/leases/:leaseid/tenants/:tenantid
+Delete an individual tenant from a property lease.
 
