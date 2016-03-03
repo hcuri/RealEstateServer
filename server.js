@@ -28,10 +28,12 @@ var loginRoutes = require('./routes/loginRoutes');
 app.use('/api', loginRoutes);
 
 // connect the authorized routers
-var userRoutes = require('./routes/userRoutes');
-var propertyRoutes = require('./routes/propertyRoutes');
-app.use('/api', userRoutes);
-app.use('/api', propertyRoutes);
+app.use('/api', require('./routes/userRoutes'));
+app.use('/api', require('./routes/propertyRoutes'));
+app.use('/api', require('./routes/expenseRoutes'));
+app.use('/api', require('./routes/zipRoutes'));
+app.use('/api', require('./routes/tenantRoutes'));
+app.use('/api', require('./routes/paymentRoutes'));
 
 // handle error
 app.use(require('./errorHandler'));
