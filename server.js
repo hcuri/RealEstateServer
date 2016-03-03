@@ -31,7 +31,6 @@ app.use('/api', loginRoutes);
 app.use('/api', require('./routes/userRoutes'));
 app.use('/api', require('./routes/propertyRoutes'));
 app.use('/api', require('./routes/expenseRoutes'));
-app.use('/api', require('./routes/zipRoutes'));
 app.use('/api', require('./routes/tenantRoutes'));
 app.use('/api', require('./routes/paymentRoutes'));
 app.use('/api', require('./routes/leaseRoutes'));
