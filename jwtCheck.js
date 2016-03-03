@@ -1,4 +1,4 @@
-var app = require('./server');
+var app = require('./app');
 var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
 // Performs a check on the JSON Web Token information to authenticate each request

@@ -9,7 +9,7 @@ var path = require('path');
 var throwjs = require('throw.js');
 var User = require('./../models/user');
 var config = require('./../config');
-var app = require('./../server');
+var app = require('./../app');
 
 // Route to check if the api works
 router.get('/', function (req, res, next) {
