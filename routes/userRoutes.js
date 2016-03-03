@@ -8,11 +8,6 @@ var Property = require('./../models/property');
 // verify API requests using JWT middleware
 router.use(require('./../jwtCheck'));
 
-// Route to check if the user is authenticated
-router.get('/authenticated', function (req, res, next) {
-    res.json({message: 'YOU ARE AUTHENTICATED!'});
-});
-
 router.route('/users/:userid')
 
     // Current user

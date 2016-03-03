@@ -16,6 +16,11 @@ router.get('/', function (req, res, next) {
     res.json({message: 'API works!'});
 });
 
+// Route to check if the user is authenticated
+router.get('/authenticated', function (req, res, next) {
+    res.json({message: 'YOU ARE AUTHENTICATED!'});
+});
+
 router.post('/register', function(req, res, next) {
 
     var user = new User();
