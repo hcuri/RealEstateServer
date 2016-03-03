@@ -17,6 +17,7 @@
     "file-stream-rotator": "*",
     "jsonwebtoken": "*",
     "kerberos": "*",
+    "lodash": "^4.6.1",
     "mongodb": "*",
     "mongoose": "*",
     "morgan": "*",
