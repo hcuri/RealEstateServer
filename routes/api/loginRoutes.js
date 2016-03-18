@@ -7,9 +7,9 @@ var async = require('async');
 var crypto = require('crypto');
 var path = require('path');
 var throwjs = require('throw.js');
-var User = require('./../models/user');
-var config = require('./../config');
-var app = require('./../app');
+var User = require('./../../models/user');
+var config = require('./../../config');
+var app = require('./../../app');
 
 // Route to check if the api works
 router.get('/', function (req, res, next) {
@@ -143,7 +143,7 @@ router.post('/forgot', function(req, res, next) {
 });
 
 router.get('/reset/:token', function(req, res) {
-    res.sendFile(path.join(__dirname + '/../views/passwordReset.html'));
+    res.sendFile(path.join(__dirname + '/../../views/passwordReset.html'));
 });
 
 router.post('/reset/:token', function(req, res, next) {

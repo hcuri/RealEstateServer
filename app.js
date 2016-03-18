@@ -38,13 +38,13 @@ app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
 
 // * Routes
-app.use('/api', require('./routes/loginRoutes'));
-app.use('/api', require('./routes/userRoutes'));
-app.use('/api', require('./routes/propertyRoutes'));
-app.use('/api', require('./routes/expenseRoutes'));
-app.use('/api', require('./routes/tenantRoutes'));
-app.use('/api', require('./routes/paymentRoutes'));
-app.use('/api', require('./routes/leaseRoutes'));
+app.use('/api', require('./routes/api/loginRoutes'));
+app.use('/api', require('./routes/api/userRoutes'));
+app.use('/api', require('./routes/api/propertyRoutes'));
+app.use('/api', require('./routes/api/expenseRoutes'));
+app.use('/api', require('./routes/api/tenantRoutes'));
+app.use('/api', require('./routes/api/paymentRoutes'));
+app.use('/api', require('./routes/api/leaseRoutes'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

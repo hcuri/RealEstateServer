@@ -1,12 +1,12 @@
 var throwjs = require('throw.js');
 var express = require('express');
 var router = express.Router();
-var User = require('./../models/user');
-var Expense = require('./../models/expense');
+var User = require('./../../models/user');
+var Expense = require('./../../models/expense');
 var _ = require('lodash');
 
 // verify API requests using JWT middleware
-router.use(require('./../jwtCheck'));
+router.use(require('./../../jwtCheck'));
 
 router.route('/users/:userid/properties/:propertyid/expenses')
 

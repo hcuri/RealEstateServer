@@ -1,14 +1,14 @@
 var throwjs = require('throw.js');
 var express = require('express');
 var router = express.Router();
-var User = require('./../models/user');
-var Payment = require('./../models/payment');
+var User = require('./../../models/user');
+var Tenant = require('./../../models/tenant');
 var _ = require('lodash');
 
 // verify API requests using JWT middleware
-router.use(require('./../jwtCheck'));
+router.use(require('./../../jwtCheck'));
 
-router.route('/users/:userid/properties/:propertyid/leases/:leaseid/payments')
+router.route('/users/:userid/properties/:propertyid/leases/:leaseid/tenants')
 
     // Get all of the current payments
     .get(function (req, res, next) {
@@ -31,7 +31,7 @@ router.route('/users/:userid/properties/:propertyid/leases/:leaseid/payments')
                     });
 
                     if (lease) {
-                        return res.status(200).json(lease.payments);
+                        return res.status(200).json(lease.tenants);
                     } else {
                         return next(new throwjs.notFound());
                     }
@@ -64,12 +64,15 @@ router.route('/users/:userid/properties/:propertyid/leases/:leaseid/payments')
                     });
 
                     if (lease) {
-                        var payment = new Payment();
+                        var tenant = new Tenant();
 
-                        payment.amount = req.body.amount;
-                        payment.date = req.body.date;
+                        tenant.firstName = req.body.firstName;
+                        tenant.lastName = req.body.lastName;
+                        tenant.phoneNumber = req.body.phoneNumber;
+                        tenant.email = req.body.email;
+                        tenant.image = req.body.image;
 
-                        lease.payments.push(payment);
+                        lease.tenants.push(tenant);
 
                         user.save(function (err, savedUser) {
                             if (err) {
@@ -90,7 +93,7 @@ router.route('/users/:userid/properties/:propertyid/leases/:leaseid/payments')
 
 
 
-router.route('/users/:userid/properties/:propertyid/leases/:leaseid/payments/:paymentid')
+router.route('/users/:userid/properties/:propertyid/leases/:leaseid/tenants/:tenantid')
 
     // Get the current expense
     .get(function (req, res, next) {
@@ -113,12 +116,12 @@ router.route('/users/:userid/properties/:propertyid/leases/:leaseid/payments/:pa
                     });
 
                     if (lease) {
-                        var payment = _.find(lease.payments, function (item) {
-                            return item.id == req.params['paymentid'];
+                        var tenant = _.find(lease.tenants, function (item) {
+                            return item.id == req.params['tenantid'];
                         });
 
-                        if(payment) {
-                            return res.status(200).json(payment);
+                        if(tenant) {
+                            return res.status(200).json(tenant);
                         } else {
                             return next(new throwjs.notFound());
                         }
@@ -153,15 +156,17 @@ router.route('/users/:userid/properties/:propertyid/leases/:leaseid/payments/:pa
                     });
 
                     if (lease) {
-                        var payment = _.find(lease.payments, function (item) {
-                            return item.id == req.params['paymentid'];
+                        var tenant = _.find(lease.tenants, function (item) {
+                            return item.id == req.params['tenantid'];
                         });
 
-                        if(payment) {
+                        if(tenant) {
 
-                            payment.amount = req.body.amount;
-                            payment.date = req.body.date;
-
+                            tenant.firstName = req.body.firstName;
+                            tenant.lastName = req.body.lastName;
+                            tenant.phoneNumber = req.body.phoneNumber;
+                            tenant.email = req.body.email;
+                            tenant.image = req.body.image;
 
                             // Save the changes to the user document
                             user.save(function (err, savedUser) {
@@ -204,13 +209,13 @@ router.route('/users/:userid/properties/:propertyid/leases/:leaseid/payments/:pa
                     });
 
                     if (lease) {
-                        var payment = _.find(lease.payments, function (item) {
-                            return item.id == req.params['paymentid'];
+                        var tenant = _.find(lease.tenants, function (item) {
+                            return item.id == req.params['tenantid'];
                         });
 
-                        if(payment) {
+                        if(tenant) {
 
-                            payment.remove();
+                            tenant.remove();
 
                             // Save the changes to the user document
                             user.save(function (err, savedUser) {

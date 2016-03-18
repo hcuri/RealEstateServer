@@ -1,1 +1,1 @@
-Copyright 2015 Hector Curi
+Copyright 2016 Hector Curi & Raz Friman
