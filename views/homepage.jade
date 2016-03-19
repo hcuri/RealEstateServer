@@ -1,0 +1,169 @@
+doctype true
+html(xmlns='http://www.w3.org/1999/xhtml', xml:lang='en', lang='en')
+    head
+        title Startup Generator
+        meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+        meta(http-equiv='Content-Script-Type', content='text/javascript')
+        meta(http-equiv='Content-Style-Type', content='text/css')
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
+
+        link(href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,300italic,100italic,400italic,500,500italic,700,700italic,900,900italic', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,800,700,400,600,300', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Oswald:400,300,700', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Lobster', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Dancing+Script:400,700', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Allan:400,700', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Corben:400', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Nobile', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Droid+Serif', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Droid+Sans', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Lekton', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Molengo', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Cardo', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Josefin+Sans', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Crimson+Text', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Allerta', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Kaushan+Script', rel='stylesheet', type='text/css')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css')
+        link(rel='stylesheet', href='/stylesheets/homepage.css')
+        script(src='/javascripts/homepage.js')
+    body#body
+        #home.site-wrapper
+            .before
+            #navigation.navbar.masthead.clearfix.top
+                .inner
+                    a(href='#home')
+                        h3#logo.masthead-brand MyRealEstate
+                    nav
+                        ul.nav.masthead-nav
+                            li.active
+                                a(href='#') Home
+                            li
+                                a(href='#about') About
+                            li
+                                a(href='#team') Our Team
+                            li
+                                a(href='#trynow') Try Now
+            #home-content.site-wrapper-inner
+                #home-text-wrapper
+                    #home-text
+                        h1#cover-heading.cover-heading Manage Real Estate. Anywhere.
+                        p#opener.lead
+                            | MyRealEstate is a cloud-enabled tool to help you manage real estate properties. Manage properties, tenants, and rent payments from the palm of your hand.
+                        p.lead
+                            a.btn.btn-lg.btn-default(href='index.html') Get started
+        #test1-cont.container.row.featurette.quote-row
+            .col-md-7
+                blockquote
+                    p#test1.lead
+                        | MyRealEstate has saved me the time and hassle associated with managing real estate properties.
+                    h2#name1.featurette-heading
+                        | Carlos Slim.
+                        span.text-muted New York City.
+        #about.container.marketing
+            .row
+                h2
+                    | Why
+                    span.company-name MyRealEstate
+                    | ?
+            .row
+                .col-lg-4
+                    #icon1.backgroundcircle
+                    h2#subHeading1 Easy
+                    p#subDesc1
+                        | It is very easy to use.
+                // /.col-lg-4
+                .col-lg-4
+                    #icon2.backgroundcircle
+                    h2#subHeading2 Efficient
+                    p#subDesc2
+                        | Managing properties is very efficient.
+                // /.col-lg-4
+                .col-lg-4
+                    #icon3.backgroundcircle
+                    h2#subHeading3 Reliable
+                    p#subDesc3
+                        | Storing your data in the cloud makes it very reliable.
+                // /.col-lg-4
+            // /.row
+        // /.container
+        // START THE FEATURETTES
+        #test2-cont.container.row.featurette.quote-row
+            .col-md-7
+                blockquote
+                    p#test2.lead
+                        | I like this app.
+                    h2#name2.featurette-heading
+                        | Donald Trump.
+                        span.text-muted The White House.
+        // /END THE FEATURETTES
+        #team.container.marketing
+            .row
+                h2
+                    | Meet the
+                    span.company-name MyRealEstate
+                    |  team
+            .row
+                .col-lg-6.team
+                    img.img-circle(src='/images/raz.jpg', alt='Raz Friman')
+                    h2 Raz Friman
+                    p
+                        | Back End Developer. Student at SMU.
+                // /.col-lg-6
+                .col-lg-6.team
+                    img.img-circle(src='/images/hector.jpg', alt='Hector Curi')
+                    h2 Hector Curi
+                    p
+                        | Front End Developer. Student at SMU.
+                // /.col-lg-6
+            // /.row
+        // /.container
+        #test3-cont.container.row.featurette.quote-row
+            .col-md-7
+                blockquote
+                    p#test3.lead
+                        | This is basically the greatest thing since sliced bread.
+                    h2#name3.featurette-heading
+                        | Raz Friman.
+                        span.text-muted Dallas, Texas.
+        // FOOTER
+        footer
+            #trynow
+                h2#bethefirst
+                    | Be the first to try out
+                    span.company-name MyRealEstate
+                form#signup(method='post', action='about.html')
+                    input#emailbox(type='text', name='Email', placeholder='Your Email')
+                    a.btn.btn-default(href='#', data-toggle='modal', data-target='#basicModal') Sign Up!
+            // Share Buttons
+            ul.share-buttons
+                li
+                    a(href='https://www.facebook.com/razzz', target='_blank', title='Share on Facebook', onclick="window.open('https://www.facebook.com/razzz'); return false;")
+                        i.fa.fa-facebook-square.fa-2x
+                li
+                    a(href='https://twitter.com/', target='_blank', title='Tweet', onclick="window.open('https://twitter.com/'); return false;")
+                        i.fa.fa-twitter-square.fa-2x
+                li
+                    a(href='https://plus.google.com', target='_blank', title='Share on Google+', onclick="window.open('https://plus.google.com/'); return false;")
+                        i.fa.fa-google-plus-square.fa-2x
+                li
+                    a(href='mailto:?subject=&body=Hello', target='_blank', title='Email', onclick="window.open('mailto:?subject=Question'); return false;")
+                        i.fa.fa-envelope.fa-2x
+            // End Share Buttons
+            #footerWords
+                p
+                    | ©
+                    script.
+                        document.write(new Date().getFullYear())
+                    span.company-name MyRealEstate
+                    | , Inc. ·
+                    a(href='#') Privacy
+                    |  ·
+                    a(href='#') Terms
+            p
+                a(href='#') Back to top
