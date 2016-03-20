@@ -7,6 +7,34 @@
 var app = require('../app');
 var debug = require('debug')('RealEstateServer:server');
 var http = require('http');
+var https = require('https');
+var fs = require('fs');
+
+var bundleName = 'cert/cert.bundle';
+var crtName = 'cert/cert.crt';
+var keyName = 'cert/cert.key';
+
+// Ensure SSL Certificate files exist
+try {
+  fs.lstatSync(keyName);
+  fs.lstatSync(crtName);
+  fs.lstatSync(bundleName);
+}
+catch (e) {
+  console.log('Cannot find cert files. Please see README for more info');
+  return;
+}
+
+// Configure SSL credentials
+var credentials = {
+  key: fs.readFileSync(keyName),
+  cert: fs.readFileSync(crtName),
+  ca: fs.readFileSync(bundleName),
+  requestCert: true,
+  rejectUnauthorized: false
+};
+
+
 
 /**
  * Get port from environment and store in Express.
@@ -19,14 +47,23 @@ app.set('port', port);
  * Create HTTP server.
  */
 var server = http.createServer(app);
-
+var secureServer = https.createServer(credentials, app);
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+if (app.get('env') === 'development') {
+  console.log('DEV MODE');
+  server.listen(port);
+  server.on('error', onError);
+  server.on('listening', onListening);
+} else if (app.get('env') === 'production') {
+  console.log('PRODUCTION MODE');
+  secureServer.listen(port);
+  secureServer.on('error', onError);
+  secureServer.on('listening', onListening);
+}
+
 
 /**
  * Normalize a port into a number, string, or false.
