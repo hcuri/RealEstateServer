@@ -7,7 +7,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/home', function(req, res, next) {
-  res.render('homepage', { title: 'MyRealEstate' });
+  res.render('homepage');
+});
+
+router.get('/login', function(req, res, next) {
+  res.render('login');
 });
 
 

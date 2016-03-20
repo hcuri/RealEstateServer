@@ -1,0 +1,45 @@
+doctype true
+html(xmlns='http://www.w3.org/1999/xhtml', xml:lang='en', lang='en')
+    head
+        title Startup Generator
+        meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+        meta(http-equiv='Content-Script-Type', content='text/javascript')
+        meta(http-equiv='Content-Style-Type', content='text/css')
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
+        link(href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,300italic,100italic,400italic,500,500italic,700,700italic,900,900italic', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic', rel='stylesheet', type='text/css')
+        link(href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,800,700,400,600,300', rel='stylesheet', type='text/css')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css')
+        link(rel='stylesheet', href='/stylesheets/homepage.css')
+        script(src='/javascripts/login.js')
+    body#body
+        #home.site-wrapper
+            .before
+            #navigation.navbar.masthead.clearfix.top
+                .inner
+                    a(href='#home')
+                        h3#logo.masthead-brand MyRealEstate
+                    nav
+                        ul.nav.masthead-nav
+                            li.active
+                                a(href='#') Home
+                            li
+                                a(href='#about') About
+                            li
+                                a(href='#team') Our Team
+                            li
+                                a(href='#trynow') Try Now
+            #home-content.site-wrapper-inner
+                #home-text-wrapper
+                    #home-text
+                        h1#cover-heading.cover-heading MyRealEstate
+                        h2#cover-heading.cover-heading Login
+                        form#form-login
+                            h1 Login
+                            input(type="text").form-control
+                            input(type="password").form-control
+                        p.lead
+                            a.btn.btn-lg.btn-default(href='index.html') Get started
