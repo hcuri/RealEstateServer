@@ -46,23 +46,23 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-var server = http.createServer(app);
-var secureServer = https.createServer(credentials, app);
+var server = null;
+
 /**
  * Listen on provided port, on all network interfaces.
  */
 
 if (app.get('env') === 'development') {
   console.log('DEV MODE');
-  server.listen(port);
-  server.on('error', onError);
-  server.on('listening', onListening);
+  server = http.createServer(app);
 } else if (app.get('env') === 'production') {
   console.log('PRODUCTION MODE');
-  secureServer.listen(port);
-  secureServer.on('error', onError);
-  secureServer.on('listening', onListening);
+  server = https.createServer(credentials, app);
 }
+
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
 
 
 /**
