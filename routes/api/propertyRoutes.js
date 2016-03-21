@@ -12,10 +12,10 @@ router.route('/users/:userid/properties')
 
     // Get all of the current user's properties
     .get(function (req, res, next) {
-        if (!req.auth || req.auth._id !== req.params['userid'] ) {
+if (!req.auth || req.auth._id !== req.params['userid'] ) {
             return next(new throwjs.unauthorized());
         }
-
+        
         User.findById(req.auth._id, function (err, user) {
             if(!user) {
                 return next(new throwjs.notFound());
