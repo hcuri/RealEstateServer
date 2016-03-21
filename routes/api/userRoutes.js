@@ -38,9 +38,9 @@ router.route('/users/:userid')
 
 
                 // Update the user variables
-                // TODO: Update more properties for the user here
-                property.firstName = req.body.firstName;
-
+                user.lastName = req.body.lastName;
+                user.image = req.body.image;
+                user.firstName = req.body.firstName;
 
                 // Save the changes to the user document
                 user.save(function (err, savedUser) {
