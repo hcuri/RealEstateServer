@@ -61,14 +61,14 @@ router.post('/login', function(req, res, next) {
         .select('email')
         .exec(function (err, user) {
             if (!user || !user.password) {
-                next(new throwjs.unauthorized('Incorrect email/password'));
+                return next(new throwjs.unauthorized('Incorrect email/password'));
             } else {
 
                 // Verify the password using bcrypt
                 bcrypt.compare(req.body.password,
                     user.password, function (err, valid) {
                         if (!valid) {
-                            next(new throwjs.unauthorized('Incorrect email/password'));
+                            return next(new throwjs.unauthorized('Incorrect email/password'));
                         }
 
                         // Create a token - valid for 24 hours

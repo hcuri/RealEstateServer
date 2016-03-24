@@ -176,8 +176,8 @@ router.route('/users/:userid/properties/:propertyid/leases/:leaseid')
                 });
 
                 if (property) {
-                    var lease = _.find(property.lease, function (item) {
-                        return item.id == req.params['lease'];
+                    var lease = _.find(property.leases, function (item) {
+                        return item.id == req.params['leaseid'];
                     });
 
                     if (lease) {
